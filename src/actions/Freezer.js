@@ -17,3 +17,19 @@ export const addProductToFreezer = (name, amount = 20) => {
     }
   }
 }
+
+export const doSomthing = () => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'FOO',
+      payload: getState().Freezer.temperature,
+    });
+  }
+}
+
+
+export default {
+  updateTemperature,
+  addProductToFreezer,
+  doSomthing,
+};

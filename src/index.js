@@ -1,15 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import store from './store';
-import { addProductToFreezer, updateTemperature } from './actions/Freezer';
-import { CHOCOLATE } from './constants/Flavours';
 
-store.subscribe(() => console.log(store.getState()));
+import App from './components/App/App';
 
-store.dispatch(updateTemperature(-8));
-store.dispatch(updateTemperature(-9));
-store.dispatch(addProductToFreezer(CHOCOLATE, 10));
-
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+);

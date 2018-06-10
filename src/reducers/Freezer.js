@@ -1,8 +1,13 @@
 import { UPDATE_TEMPERATURE, ADD_PRODUCT_TO_FREEZER } from '../constants/Freezer';
+import * as FLAVOURS from '../constants/Flavours'.
+
 
 const INITIAL_STATE = {
   temperature: null,
-  flavours: {},
+  flavours: {
+    [FLAVOURS.STRAWBERRY]: 10,
+    [FLAVOURS.SALTED_CARAMEL]: 20,
+  },
 }
 
 const FreezerReducer = (state = INITIAL_STATE, action) => {

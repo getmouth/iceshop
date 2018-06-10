@@ -1,4 +1,4 @@
-import { updateTemperature, addProductToFreezer } from './Freezer';
+import { updateTemperature, addProductToFreezer, doSomthing } from './Freezer';
 import { UPDATE_TEMPERATURE, ADD_PRODUCT_TO_FREEZER } from '../constants/Freezer';
 
 describe('updateTemperature()', () => {
@@ -40,4 +40,31 @@ describe('addProductToFreezer()', () => {
     
     expect(action.payload.amount).toEqual(20);
   });
+});
+
+describe('doSomething()', ()=> {
+  const getState = () => ({
+    Freezer: {
+      temperature: 10,
+    }
+  });
+
+  it ('should dispatch the "FOO" action', ()=> {
+    const dispatch = jest.fn();
+    const action = doSomthing();
+    action(dispatch, getState);
+
+    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls[0][0].type).toEqual('FOO');
+  })
+
+  
+  it ('should use the temperature in the state for the payload', ()=> {
+    const dispatch = jest.fn();
+    const action = doSomthing();
+    action(dispatch, getState);
+
+    expect(dispatch.mock.calls.length).toEqual(1);
+    expect(dispatch.mock.calls[0][0].payload).toEqual(10);
+  })
 });

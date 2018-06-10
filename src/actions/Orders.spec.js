@@ -1,4 +1,6 @@
-import  {placeOrder, PLACE_ORDER } from '../actions/Orders';
+import  {placeOrder, PLACE_ORDER, fulfillOrder, FULFILL_ORDER,
+payForOrder, PAY_FOR_ORDER,CANCEL_ORDER,cancelOrder } from '../actions/Orders';
+import OrderReducer from '../reducers/Orders';
 
 describe('placeOrder()', () => {
   it ('should have the right action type', () => {
@@ -31,6 +33,39 @@ describe('placeOrder()', () => {
   it ('should return current date in the payload if no date specified', () => {
     const action = placeOrder({});
     expect(typeof action.payload.createdAt).toEqual('number');
+  });
+
+});
+
+describe ('fulfill order',() => {
+  it ('it should have the right action type', () => {
+    const action = fulfillOrder(5);
+    expect(action.type).toEqual(FULFILL_ORDER);
+  });
+
+  it ('it should have the ID in the payload', () => {
+    const action = fulfillOrder(5);
+    expect(action.payload).toEqual(5);
+  });
+
+  it ('it should have the right action type', () => {
+    const action = payForOrder(5);
+    expect(action.type).toEqual(PAY_FOR_ORDER);
+  });
+
+  it ('it should have the ID in the payload', () => {
+    const action = payForOrder(5);
+    expect(action.payload).toEqual(5);
+  });
+
+  it ('it should have the right action type', () => {
+    const action = cancelOrder(5);
+    expect(action.type).toEqual(CANCEL_ORDER);
+  });
+
+  it ('it should have the ID in the payload', () => {
+    const action = cancelOrder(5);
+    expect(action.payload).toEqual(5);
   });
 
 });

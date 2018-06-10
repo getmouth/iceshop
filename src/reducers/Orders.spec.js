@@ -1,5 +1,6 @@
 import OrderReducer from './Orders';
-import { placeOrder, PLACE_ORDER } from '../actions/Orders';
+import { placeOrder, PLACE_ORDER,fulfillOrder,FULFILL_ORDER, payForOrder,
+cancelOrder, CANCEL_ORDER } from '../actions/Orders';
 import VANILLA from '../constants/Flavours';
 
 describe('Orders reducer', ()=> {
@@ -26,4 +27,39 @@ describe('Orders reducer', ()=> {
 
     expect(action.payload.scoops).toEqual({[VANILLA]: 1});
   });
+
+  it ( 'should mark a given order as fulfilled in the store', () => {
+    const existingState = [
+      {
+        customerName: 'Cindy',
+        status: 'pending',
+      }
+    ];
+    const newState = OrderReducer( existingState, fulfillOrder(0));
+    expect(newState[0].status).toEqual('fulfilled');
+  });
+
+  it ( 'should mark a given order as paid in the store', () => {
+    const existingState = [
+      {
+        customerName: 'Cindy',
+        status: 'pending',
+      }
+    ];
+    const newState = OrderReducer( existingState, payForOrder(0));
+    expect(newState[0].status).toEqual('paid');
+  });
+
+  it ( 'should remove a given order in the store', () => {
+    const existingState = [
+      {
+        customerName: 'Cindy',
+        status: 'pending',
+      }
+    ];
+    const newState = OrderReducer( existingState, cancelOrder(0));
+    expect(newState).toEqual([]);
+  });
+
+
 });
